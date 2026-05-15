@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Snake Game"
+version = "1.0.0"
+id = "artifacts/snake-game"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24915
+
+[services.development]
+run = "pnpm --filter @workspace/snake-game run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/snake-game", "run", "build" ]
+publicDir = "artifacts/snake-game/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24915"
+BASE_PATH = "/"
